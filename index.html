@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elizabet Web Shop</title>
+<body background="foto-saya.jpg">
+<style>
+:root{
+  --pink:#f6c1d1;
+  --ungu:#b48cc8;
+  --coklat:#b08968;
+  --text:#4a2c3a;
+}
+
+*{
+  box-sizing:border-box;
+  font-family:Segoe UI,Tahoma,Verdana,sans-serif;
+}
+
+body{
+  margin:0;
+  font-family:Segoe UI, Tahoma, sans-serif;
+  background-image: url("foto-saya.jpg");
+  padding-top:90px;
+  padding-bottom:70px;
+}
+
+
+footer{
+  margin-top:auto;
+}
+
+/* tombol hamburger hanya tampil di mobile */
+.hamburger {
+  display: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 4px;
+  width: 25px;
+  height: 20px;
+  justify-content: center;
+}
+
+.hamburger div {
+  height: 3px;
+  background: var(--ungu);
+  border-radius: 3px;
+}
+
+@media(max-width:768px){
+  .hamburger { display: flex; }
+  nav ul {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    background: rgba(255,255,255,.9);
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,.1);
+  }
+  nav ul.show {
+    display: flex;
+  }
+}
+
+
+/* ===== HEADER ===== */
+header{
+  background:rgba(255,255,255,.85);
+  backdrop-filter:blur(10px);
+  padding:14px 22px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  box-shadow:0 8px 20px rgba(0,0,0,.1);
+}
+
+header{
+  position:fixed;
+  top:0;
+  width:100%;
+  z-index:999;
+}
+
+
+footer{
+  position:fixed;
+  bottom:0;
+  width:100%;
+  text-align:center;
+}
+
+.welcome-wrapper{
+  flex:1;
+  overflow:hidden;
+  margin:0 20px;
+  position:relative;
+  height:40px;
+}
+
+.welcome-text{
+  position:absolute;
+  width:100%;
+  text-align:center;
+  color:var(--ungu);
+  font-weight:600;
+  font-size:18px;
+  animation: scroll-vertical 3s linear infinite;
+}
+
+@keyframes scroll-vertical{
+  0% { top: -40px; }
+  100% { top: 40px; }
+}
+
+
+
+nav a{
+  position:relative;
+  overflow:hidden;
+  font-weight:600;
+  color:var(--ungu);
+}
+
+nav a::after{
+  content:'';
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:0;
+  height:0;
+  background:rgba(246,193,209,.6);
+  border-radius:50%;
+  transform:translate(-50%,-50%);
+  transition:width .4s ease, height .4s ease, opacity .6s;
+  opacity:0;
+}
+
+nav a.active::after{
+  width:160%;
+  height:400%;
+  opacity:1;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.brand img{
+  height:38px;
+}
+
+.brand span{
+  font-size:19px;
+  font-weight:700;
+  color:var(--ungu);
+}
+
+/* ===== NAV ===== */
+nav ul{
+  list-style:none;
+  display:flex;
+  gap:18px;
+  margin:0;
+  padding:0;
+}
+
+nav a {
+  position: relative;
+  display: inline-block;
+  padding: 6px 12px;
+  color: #4a2c3a;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 12px;
+  transition: color 0.3s ease;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(180,140,200,0.4);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.4s ease, height 0.4s ease, opacity 0.4s ease;
+  opacity: 0;
+  z-index: -1;
+}
+
+nav a.active::after,
+nav a:hover::after {
+  width: 160%;
+  height: 400%;
+  opacity: 1;
+}
+
+nav a:hover {
+  color: white;
+}
+
+ @media (max-width:768px){
+
+  header{
+    align-items:center;
+  }
+
+  nav ul{
+    flex-direction:row;
+    justify-content:space-around;
+    width:100%;
+  }
+
+  nav a{
+    background:none;
+    padding:6px;
+    font-size:14px;
+  }
+
+  section{
+    margin:14px;
+    padding:18px;
+  }
+
+  .products{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:16px;
+  }
+  @media(max-width:768px){
+    .products{
+      grid-template-columns:repeat(2,1fr);
+    }
+  }
+
+
+  .card{
+    padding:10px;
+  }
+
+  h1{
+    font-size:20px;
+  }
+  
+  /* ===== FORM TRANSAKSI ===== */
+  .transaksi-card{
+    background:rgba(255,255,255,.9);
+    border-radius:20px;
+    padding:24px;
+    margin-bottom:28px;
+    box-shadow:0 10px 30px rgba(0,0,0,.1);
+  }
+
+  .field{
+    display:flex;
+    flex-direction:column;
+  }
+
+  .field label{
+    font-size:14px;
+    font-weight:600;
+    margin-bottom:6px;
+    color:#6b3f52;
+  }
+
+  .field input,
+  .field select{
+    padding:12px 14px;
+    border-radius:12px;
+    border:1px solid #e6b5c8;
+    font-size:14px;
+  }
+
+  .field input:focus,
+  .field select:focus{
+    outline:none;
+    border-color:var(--ungu);
+    box-shadow:0 0 0 3px rgba(180,140,200,.3);
+  }
+
+  .table-wrapper{
+    overflow-x:auto;
+  }
+
+
+}
+
+
+/* ===== SECTION ===== */
+section{
+  max-width:1000px;
+  margin:36px auto;
+  padding:30px;
+  background:rgba(255,255,255,.82);
+  backdrop-filter:blur(12px);
+  border-radius:26px;
+  border:2px solid rgba(180,140,200,.6);
+  box-shadow:
+    0 0 0 6px rgba(246,193,209,.35),
+    0 20px 50px rgba(0,0,0,.18);
+  display:none;
+}
+
+section.active{
+  display:block;
+}
+
+h1{
+  color:var(--ungu);
+}
+
+/* ===== PRODUK ===== */
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:20px;
+  margin-top:20px;
+}
+
+
+.card {
+  background: rgba(246, 193, 209, 0.6);
+  border: 2px solid rgba(180, 140, 200, 0.6);
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.card img {
+  width: 100%;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.card:hover img {
+  transform: scale(1.05);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+
+/* ===== FORM TRANSAKSI ===== */
+.row{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:16px;
+}
+
+label{
+  font-size:14px;
+}
+
+input, select{
+  width:100%;
+  padding:10px 14px;
+  border-radius:10px;
+  border:1px solid #e6b5c8;
+}
+
+button.submit{
+  margin-top:22px;
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:12px;
+  background:linear-gradient(90deg,var(--coklat),var(--pink));
+  color:#fff;
+  font-size:15px;
+  cursor:pointer;
+}
+
+/* ===== TABLE ===== */
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:16px;
+}
+
+thead{
+  background:var(--pink);
+  color:#fff;
+}
+
+th, td{
+  padding:12px;
+  text-align:left;
+}
+
+tbody tr:nth-child(even){
+  background:#fff5f9;
+}
+#profil {
+  color: #4a2c3a;
+}
+
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(160px,1fr));
+  gap:16px;
+  margin-top:20px;
+}
+
+
+
+/* ===== FOOTER ===== */
+footer{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  background:rgba(255,255,255,.85);
+  backdrop-filter:blur(10px);
+
+  font-size:13px;
+  color:#7a4a5f;
+
+  padding:12px 0;
+  z-index:1000;
+}
+
+
+
+
+/* ===== RESPONSIVE HP ===== */
+@media (max-width:768px){
+  
+  header {
+  padding: 8px 12px;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+
+  nav ul{
+    flex-direction:column;
+    gap:8px;
+  }
+
+  section{
+    margin:18px 12px;
+    padding:20px;
+  }
+
+  .products{
+    grid-template-columns:1fr;
+  }
+
+  .row{
+    grid-template-columns:1fr;
+  }
+
+  h1{
+    font-size:22px;
+  }
+
+  table{
+    font-size:13px;
+  }
+
+  th, td{
+    padding:8px;
+  }
+  .transaksi-card{
+  background:#fff;
+  padding:20px;
+  border-radius:20px;
+  margin-bottom:20px;
+  box-shadow:0 10px 20px rgba(0,0,0,.1);
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+}
+
+.field label{
+  margin-bottom:6px;
+  font-weight:600;
+}
+
+.field input,
+.field select{
+  padding:10px;
+  border-radius:10px;
+  border:1px solid #e6b5c8;
+}
+
+.hamburger {
+  display: flex;
+  position: absolute;
+  top: 15px;
+  right: 20px;
+}
+
+nav ul {
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+  background: rgba(255,255,255,.9);
+  position: absolute;
+  top: 60px;
+  right: 10px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0,0,0,.1);
+}
+
+nav ul.show {
+  display: flex;
+}
+
+
+
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="brand">
+    <img src="logo.jpg">
+    <span>Elizabet Web Shop</span>
+  </div>
+
+  <div class="welcome-wrapper">
+    <div class="welcome-text">Selamat Datang di Elizabet Web Shop</div>
+  </div>
+
+  <div class="hamburger" onclick="toggleNav()">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+
+  <nav>
+    <ul>
+      <li><a onclick="showPage('home', this)">Home</a></li>
+      <li><a onclick="showPage('transaksi', this)">Transaction</a></li>
+      <li><a onclick="showPage('profil', this)">Profile</a></li>
+      <li><a onclick="showPage('login', this)">Login</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- HOME -->
+<section id="home" class="active">
+  <h1>Beranda</h1>
+  
+  <h1>SELAMAT DATANG DI EWS! DI BAWAH INI ADALAH KOLEKSI PRODUK KAMI :)</h1>
+  
+  <hr width="100%" size="6" color="pink">
+  
+  <hr>
+  <b><center>HIJAB STYLE</center></b>
+  <hr>
+
+  <div class="products">
+    <div class="card">
+      <img src="bm1.jpg">
+      <h3>EWSHIJ1</h3>
+      <p>Rp 60.000</p>
+    </div>
+    <div class="card">
+      <img src="bm2.jpg">
+      <h3>EWSHIJ2</h3>
+      <p>Rp 75.000</p>
+    </div>
+    <div class="card">
+      <img src="bm3.jpg">
+      <h3>EWSHIJ3</h3>
+      <p>Rp 60.000</p>
+    </div>
+  </div>
+  <div class="products">
+    <div class="card">
+      <img src="bm4.jpg">
+      <h3>EWSHIJ4</h3>
+      <p>Rp 60.000</p>
+    </div>
+    <div class="card">
+      <img src="bm5.jpg">
+      <h3>EWSHIJ5</h3>
+      <p>Rp 75.000</p>
+    </div>
+    <div class="card">
+      <img src="bm6.jpg">
+      <h3>EWSHIJ6</h3>
+      <p>Rp 75.000</p>
+    </div>
+  </div>
+  <div class="products">
+    <div class="card">
+      <img src="bm7.jpg">
+      <h3>EWSHIJ7</h3>
+      <p>Rp 60.000</p>
+    </div>
+    <div class="card">
+      <img src="bm8.jpg">
+      <h3>EWSHIJ8</h3>
+      <p>Rp 75.000</p>
+    </div>
+    <div class="card">
+      <img src="bm9.jpg">
+      <h3>EWSHIJ9</h3>
+      <p>Rp 60.000</p>
+    </div>
+  </div>
+  <hr>
+  <b><center>KOREAN STYLE</center></b>
+  <hr>
+  <div class="products">
+    <div class="card">
+      <img src="bkor1.jpg">
+      <h3>EWSKS1</h3>
+      <p>Rp 75.000</p>
+    </div>
+    <div class="card">
+      <img src="bkor2.jpg">
+      <h3>EWSKS2</h3>
+      <p>Rp 60.000</p>
+    </div>
+    <div class="card">
+      <img src="bkor3.jpg">
+      <h3>EWSKS3</h3>
+      <p>Rp 75.000</p>
+    </div>
+  </div>
+  <div class="products">
+    <div class="card">
+      <img src="bkor4.jpg">
+      <h3>EWSKS4</h3>
+      <p>Rp 60.000</p>
+    </div>
+    <div class="card">
+      <img src="bkor5.jpg">
+      <h3>EWSKS5</h3>
+      <p>Rp 75.000</p>
+    </div>
+    <div class="card">
+      <img src="bkor6.jpg">
+      <h3>EWSKS6</h3>
+      <p>Rp 75.000</p>
+    </div>
+  </div>
+  <div class="products">
+    <div class="card">
+      <img src="bkor7.jpg">
+      <h3>EWSKS7</h3>
+      <p>Rp 60.000</p>
+    </div>
+    <div class="card">
+      <img src="bkor8.jpg">
+      <h3>EWSKS8</h3>
+      <p>Rp 75.000</p>
+    </div>
+    <div class="card">
+      <img src="bkor9.jpg">
+      <h3>EWSKS9</h3>
+      <p>Rp 75.000</p>
+    </div>
+  </div>
+  <hr>
+  <b><center>ROK PANJANG</center></b>
+  <hr>
+  <div class="products">
+    <div class="card">
+      <img src="rp1.jpg">
+      <h3>EWSROK1</h3>
+      <p>Rp 60.000</p>
+    </div>
+    <div class="card">
+      <img src="rp2.jpg">
+      <h3>EWSROK2</h3>
+      <p>Rp 75.000</p>
+    </div>
+    <div class="card">
+      <img src="rp3.jpg">
+      <h3>EWSROK3</h3>
+      <p>Rp 75.000</p>
+    </div>
+  </div>
+  <hr>
+  <b><center>CELANA PANJANG</center></b>
+  <hr>
+  <div class="products">
+    <div class="card">
+      <img src="cp1.jpg">
+      <h3>EWSCELANA1</h3>
+      <p>Rp 60.000</p>
+    </div>
+    <div class="card">
+      <img src="cp2.jpg">
+      <h3>EWSCELANA2</h3>
+      <p>Rp 75.000</p>
+    </div>
+    <div class="card">
+      <img src="cp3.jpg">
+      <h3>EWSCELANA3</h3>
+      <p>Rp 60.000</p>
+    </div>
+    <div class="card">
+      <img src="CP4.jpg">
+      <h3>EWSCELANA4</h3>
+      <p>Rp 75.000</p>
+    </div>
+  </div>
+</section>
+
+<!-- TRANSAKSI -->
+<section id="transaksi">
+  <h1>Transaksi Pembelian</h1>
+
+  <div class="transaksi-card">
+    <div class="transaksi-form">
+      <div class="field">
+        <label>Kode Barang</label>
+        <input type="text" id="kode" placeholder="Contoh: EWSHIJ1">
+      </div>
+      <div class="field">
+        <label>Size</label>
+        <input type="text" id="size" placeholder="L/XL/XXL">
+      </div>
+      <div class="field">
+        <label>Nama Pembeli</label>
+        <input type="text" id="nama" placeholder="Nama lengkap Anda">
+      </div>
+      <div class="field">
+        <label>Kontak (WhatsApp)</label>
+        <input type="tel" id="kontak" placeholder="081234556789">
+      </div>
+      <div class="field">
+        <label>Harga</label>
+        <select id="harga">
+          <option value="">-- Pilih --</option>
+          <option value="60000">Rp 60.000</option>
+          <option value="75000">Rp 75.000</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Jumlah</label>
+        <input type="number" id="jumlah" min="1" placeholder="Jumlah: 1/2/3">
+      </div>
+    </div>
+
+    <button class="submit" onclick="simpan()">Simpan Transaksi</button>
+  </div>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Kode</th>
+          <th>Size</th>
+          <th>Nama</th>
+          <th>Kontak</th>
+          <th>Harga</th>
+          <th>Jumlah</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody id="data"></tbody>
+    </table>
+  </div>
+  <div class="total-wrapper" style="margin-top:16px; text-align:right;">
+    <h3>Total Keseluruhan: Rp <span id="total">0</span></h3>
+  </div>
+
+  <center>
+    <h1>We are available on</h1>
+    <h3>Instagram:<a href="https://www.instagram.com/ewshopid" target="_blank">@EWSHOPID</a></h3>
+    <h3>Alamat:<a href="https://goo.gl/maps/BOGOR" target="_blank">EWS Store Bogor</a></h3>
+    <h3>WhatsApp:<a href="https://wa.me/628120000000" target="_blank">Contact Us</a></h3>
+  </center>
+</section>
+
+<!-- PROFIL -->
+<section id="profil">
+  <h1>Profil Elizabet Web Shop</h1>
+
+  <p>
+    Selamat datang di halaman Elizabet Web Shop, tempat Anda mencari pakaian yang modis dan nyaman digunakan.
+  </p>
+  <ul>
+    <li>Tersedia Hijab Style dan Korean Style</li>
+    <li>Harga ekonomis, desain modis</li>
+    <li>Jahitan rapi, bahan tebal, nyaman dipakai</li>
+    <li>Harga belum termasuk ongkir</li>
+  </ul>
+  <hr>
+  <h3><b>
+    <strong>Petunjuk Penggunaan Web:</strong><br><br>
+    Home: Untuk melihat dan menjelajahi semua barang yang tersedia.<br><br>
+    Transaksi: Isilah data dengan lengkap dan valid, termasuk kode barang, nama pembeli, kontak, harga, dan jumlah.<br><br>
+    Profil: Halaman ini berisi deskripsi singkat web dan petunjuk penggunaan.<br><br>
+    Login: Masukkan username dan password yang tersedia agar bisa mengakses halaman Transaksi.
+  </b></h3>
+  <hr width="100%" size="5" color="black">
+  <h4>WEB INI DIBUAT OLEH:<br>
+    NAMA: Elizabet<br>
+    NIM: 251011701241<br>
+    Mata Kuliah: Pemrograman Web 1<br>
+    01SIFE010 PRODI SISTEM INFORMASI<br>
+    <hr><br>
+    DENGAN DOSEN PENGAMPU:<br>
+    Ibu Hananing Sumaningdiah Larasati S.Kom, M.KOM.<br>
+    Dosen Pemrograman Web 1
+  </h4>
+  <hr>
+  <p style="font-size:13px;font-style:italic;">
+    Catatan: Halaman ini dibuat oleh Elizabet untuk keperluan
+    Ujian Akhir Semester mata kuliah Pemrograman Web 1.
+    Saya membuat web olshop yang sudah bisa transaksi langsung dari web ini, nav Home berisi daftar barang yang tersedia, Transaction untuk menulis data transaksi pelanggan seperti kode barang, nama, no hp dll, Login berisi username dan password yang akan digunakan untuk memulai transaksi. Mohon maaf bu jika ada kesalahan dalam pembuatan web ini. Terima Kasih.
+  </p>
+  
+  <div class="profile-container">
+    <h1>DOSEN PENGAMPU:<br>
+      Ibu Hananing Sumaningdiah Larasati S.Kom., M.Kom.<br>
+      Dosen Mata Kuliah Pemrograman Web 1</h1>
+  </div>
+</section>
+
+<!-- LOGIN -->
+<section id="login">
+  <h1>Login Pengguna</h1>
+
+  <div class="row">
+    <div>
+      <label>Username</label>
+      <input type="text" id="username" placeholder="masukkan username">
+    </div>
+
+    <div>
+      <label>Password</label>
+      <input type="password" id="password" placeholder="masukkan password">
+    </div>
+  </div>
+  <button class="submit" onclick="login()">Login</button>
+  <p>note: untuk login gunakan username dan password dibawah ini</p>
+  <h3><center>username : "ewscust", password: "lgbycust12"</center></h3>
+</section>
+
+<footer>
+  © 2026 | Elizabet Web Shop
+</footer>
+
+<script>
+let loggedIn = false;
+let grandTotal = 0;
+const users = [
+  { username: "ewscust", password: "lgbycust12" }
+];
+
+function toggleNav(){
+  const nav = document.querySelector('nav ul');
+  nav.classList.toggle('show');
+}
+
+function showPage(id, el){
+  if(id === 'transaksi' && !loggedIn){
+    alert("Silakan login dulu sebelum mengakses transaksi!");
+    showPage('login');
+    return;
+  }
+  
+  document.querySelectorAll('section').forEach(s=>{
+    s.classList.remove('active');
+  });
+  
+  document.getElementById(id).classList.add('active');
+
+  document.querySelectorAll('nav a').forEach(a=>{
+    a.classList.remove('active');
+  });
+
+  if(el) {
+    el.classList.add('active');
+  }
+
+  // Tutup nav di mobile
+  const nav = document.querySelector('nav ul');
+  if(window.innerWidth <= 768){
+    nav.classList.remove('show');
+  }
+}
+
+function simpan(){
+  let k = document.getElementById('kode').value,
+      s = document.getElementById('size').value,
+      n = document.getElementById('nama').value,
+      c = document.getElementById('kontak').value,
+      h = parseInt(document.getElementById('harga').value),
+      j = parseInt(document.getElementById('jumlah').value);
+
+  if(!k||!n||!c||!h||!j){
+    alert('Masukkan Data Yang Lengkap!');
+    return;
+  }
+
+  let totalItem = h * j;
+  grandTotal += totalItem;
+
+  document.getElementById('data').innerHTML += `
+    <tr>
+      <td>${k}</td>
+      <td>${s}</td>
+      <td>${n}</td>
+      <td>${c}</td>
+      <td>${h}</td>
+      <td>${j}</td>
+      <td>${totalItem}</td>
+    </tr>`;
+
+  document.getElementById('total').innerText = grandTotal;
+
+  // reset form
+  document.getElementById('kode').value = '';
+  document.getElementById('size').value = '';
+  document.getElementById('nama').value = '';
+  document.getElementById('kontak').value = '';
+  document.getElementById('harga').value = '';
+  document.getElementById('jumlah').value = '';
+}
+
+function login(){
+  const u = document.getElementById("username").value;
+  const p = document.getElementById("password").value;
+
+  if(!u || !p){
+    alert("Masukkan username dan password!");
+    return;
+  }
+
+  const user = users.find(user => user.username === u && user.password === p);
+
+  if(user){
+    alert("Login berhasil! Selamat datang " + u);
+    loggedIn = true;
+    showPage('transaksi');
+  } else {
+    alert("Username atau password salah!");
+  }
+}
+
+// Set halaman home aktif saat load
+showPage('home');
+</script>
+
+</body>
+</html>
